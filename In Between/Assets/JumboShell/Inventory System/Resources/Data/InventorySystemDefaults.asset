@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2787b98e37078c42948542dac19e381, type: 3}
+  m_Name: InventorySystemDefaults
+  m_EditorClassIdentifier: 
+  defaultItem: {fileID: 8700719489510599380, guid: a555bda8b25028948889c3f437c0691d, type: 3}
+  defaultInventory: {fileID: 8584176206078587211, guid: 60c54c7f13669c84090602e1893b8e83, type: 3}
+  defaultSlot: {fileID: 1221986874689359575, guid: a2e5cf415f219e7468592d991d35e0d9, type: 3}
+  defaultToolTip: {fileID: 5916943303052185385, guid: 433a2842a597b934d81a29f722c18378, type: 3}
+  defaultIcon: {fileID: 8700719489510599380, guid: 0b95c9056c586394bb4a6d1a4140d7e5, type: 3}
+  defaultInteractText: {fileID: 1282932491467745826, guid: 5265c2b6f76f6d64090b88aa727d977f, type: 3}
