@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public CinemachineVirtualCamera mainCamera;
 
     public GameObject currentCharacter;
+    public GameObject model_root;
 
     [Range(0, 20)] public float movement_speed;
     [Range(0, 20)] public float jump_power;
@@ -48,20 +49,24 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position += new Vector3(movement_direction.x, 0, movement_direction.y) * movement_speed * Time.deltaTime;
+       currentCharacter.transform.position += new Vector3(movement_direction.x, 0, movement_direction.y) * movement_speed * Time.deltaTime;
     }
 
     public void ChangeCharacter(InputAction.CallbackContext context)
     {
         IControllable[] c = GetComponentsInChildren<IControllable>();
-        foreach(IControllable i in c)
+
+        for(int i = 0; i < c.Length; i++)
         {
-            if(i.IsControlled() == false)
+            if (c[i].IsControlled() == false)
             {
                 currentCharacter.GetComponent<IControllable>().DisableControl();
-                currentCharacter = i.EnableControl();
+                currentCharacter = c[i].EnableControl();
                 rb = currentCharacter.GetComponent<Rigidbody>();
                 animator = currentCharacter.GetComponentInChildren<Animator>();
+                mainCamera.Follow = currentCharacter.transform;
+                model_root = currentCharacter.GetComponent<AI>().model_root;
+                break;
             }
         }
     }
@@ -69,7 +74,14 @@ public class Player : MonoBehaviour
     #region MOVEMENT
     public void Movement(InputAction.CallbackContext context)
     {
-        movement_direction = context.ReadValue<Vector2>();      
+        if (context.performed) { animator.SetBool("isWalking", true); }
+        else if (context.canceled) { animator.SetBool("isWalking", false); }
+
+        movement_direction = context.ReadValue<Vector2>();
+
+        Vector3 position = currentCharacter.transform.position + new Vector3(movement_direction.x, 0, movement_direction.y);
+
+        model_root.transform.LookAt(new Vector3(position.x, model_root.transform.position.y, position.z), Vector3.up);
     }
 
     public void Jump(InputAction.CallbackContext context)

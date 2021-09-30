@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a90be519ec1cd641984130e43bb9ee3, type: 3}
   m_Name: InventorySystemSettings
   m_EditorClassIdentifier: 
-  inventoryProfile: {fileID: 11400000, guid: f7f5c6af525f87d4b86bd5291069202b, type: 2}
-  itemDatabase: {fileID: 11400000, guid: e2cf899f6d9d19841998c38e02f81e79, type: 2}
-  autoSave: 1
+  inventoryProfile: {fileID: 0}
+  itemDatabase: {fileID: 0}
+  autoSave: 0

@@ -11,9 +11,11 @@ public class AI : MonoBehaviour, IControllable
 
     public Transform followTarget;
 
+    public GameObject model_root;
+
     public bool Is_Controlled;
 
-    void Start()
+    private void Start()
     {
         agent.speed = 0f;
     }
@@ -32,6 +34,7 @@ public class AI : MonoBehaviour, IControllable
     public void DisableControl()
     {
         Is_Controlled = false;
+        agent.isStopped = false;
     }
 
     public bool IsControlled()
@@ -42,20 +45,24 @@ public class AI : MonoBehaviour, IControllable
 
     public void AI_Behaviour(bool isEnabled)
     {
-        if (!isEnabled) { return; }
-        if (agent.remainingDistance < 0.3f)
+        if (isEnabled) {
+            agent.isStopped = true; 
+            return; 
+        }
+        else if (agent.remainingDistance < 3f)
         {
             agent.speed = 0f;
 
             animator.SetBool("isWalking", false);
         }
-        if (agent.remainingDistance > 0.3f)
+        else if (agent.remainingDistance > 3f)
         {
-            agent.speed = 3f;
+            agent.speed = 5f;
 
             animator.SetBool("isWalking", true);
         }
 
         agent.SetDestination(followTarget.position);
+
     }
 }
