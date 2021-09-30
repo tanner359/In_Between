@@ -24698,6 +24698,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1373311968}
   currentCharacter: {fileID: 1655615957363807}
   model_root: {fileID: 1556079797904179}
+  flashlight: {fileID: 96668165}
   movement_speed: 5
   jump_power: 5
   movement_direction: {x: 0, y: 0}
