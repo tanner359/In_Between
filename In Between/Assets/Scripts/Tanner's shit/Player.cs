@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public GameObject currentCharacter;
     public GameObject model_root;
+    public GameObject flashlight;
 
     [Range(0, 20)] public float movement_speed;
     [Range(0, 20)] public float jump_power;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
         inputs.Player.Sprint.performed += Sprint;
         inputs.Player.Sprint.canceled += Sprint;
         inputs.Player.ChangeCharacter.performed += ChangeCharacter;
+        inputs.Player.FlashLight.performed += ToggleFlashlight;
         inputs.Player.Enable();
     }
 
@@ -50,6 +52,11 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
        currentCharacter.transform.position += new Vector3(movement_direction.x, 0, movement_direction.y) * movement_speed * Time.deltaTime;
+    }
+
+    public void ToggleFlashlight(InputAction.CallbackContext context)
+    {
+        flashlight.SetActive(!flashlight.activeSelf);
     }
 
     public void ChangeCharacter(InputAction.CallbackContext context)

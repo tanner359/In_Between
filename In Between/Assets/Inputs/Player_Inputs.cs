@@ -49,6 +49,14 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""FlashLight"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9dd0c4d-3c9b-43a4-8ca5-d7206744cb82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,17 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                     ""action"": ""Change Character"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a063686-0d1a-42ce-b666-ec0f9d2316b6"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""FlashLight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -157,6 +176,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_ChangeCharacter = m_Player.FindAction("Change Character", throwIfNotFound: true);
+        m_Player_FlashLight = m_Player.FindAction("FlashLight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -210,6 +230,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_ChangeCharacter;
+    private readonly InputAction m_Player_FlashLight;
     public struct PlayerActions
     {
         private @Player_Inputs m_Wrapper;
@@ -218,6 +239,7 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @ChangeCharacter => m_Wrapper.m_Player_ChangeCharacter;
+        public InputAction @FlashLight => m_Wrapper.m_Player_FlashLight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -239,6 +261,9 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 @ChangeCharacter.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
                 @ChangeCharacter.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
                 @ChangeCharacter.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeCharacter;
+                @FlashLight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashLight;
+                @FlashLight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashLight;
+                @FlashLight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashLight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -255,6 +280,9 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
                 @ChangeCharacter.started += instance.OnChangeCharacter;
                 @ChangeCharacter.performed += instance.OnChangeCharacter;
                 @ChangeCharacter.canceled += instance.OnChangeCharacter;
+                @FlashLight.started += instance.OnFlashLight;
+                @FlashLight.performed += instance.OnFlashLight;
+                @FlashLight.canceled += instance.OnFlashLight;
             }
         }
     }
@@ -274,5 +302,6 @@ public class @Player_Inputs : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnChangeCharacter(InputAction.CallbackContext context);
+        void OnFlashLight(InputAction.CallbackContext context);
     }
 }
